@@ -4,10 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
+use function PHPSTORM_META\type;
+
 class HomePageComponent extends Component
 {
     public $count = 0;
     public $counttoast = 0;
+    protected $listeners = ['delete'];
 
     public function toast()
     {
@@ -20,12 +23,21 @@ class HomePageComponent extends Component
 public function sweetalert()
 {
     $this->dispatchBrowserEvent('swal:modal',[
+        'type' => "warning",
         'title'=> "Good job!",
         'text'=> "You launched the sweet alert!",
         'icon'=> "success",
         'button'=> "Aww yess!",
+        'id' => '192',
     ]);
     $this->count++;
+}
+
+public function delete($id)
+{
+    $this->dispatchBrowserEvent('toaster:info',[
+        'message' => 'deleted sucessfully',
+    ]); 
 }
 
     public function render()

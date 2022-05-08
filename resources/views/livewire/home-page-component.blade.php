@@ -25,6 +25,11 @@
             text: event.detail.text,
             icon: event.detail.icon,
             button: event.detail.button,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                window.livewire.emit('delete','event.detail.id');
+            }
         });
     });
     
